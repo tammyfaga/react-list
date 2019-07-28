@@ -7,12 +7,7 @@ import AppBar from './AppBar';
 
 class App extends React.Component {
   state = {
-    notes: [
-      { id:1, text: 'Teste 1' },
-      { id:2, text: 'Teste 2' },
-      { id:3, text: 'Teste 3' },
-      { id:4, text: 'Teste 4' },
-    ]
+    notes: []
   };
 
   handleAddNote = text => {
@@ -64,10 +59,20 @@ class App extends React.Component {
     });
   };
 
+  handleReload = () => {
+    const notes = window.localStorage.getItem('notes');
+    this.setState({ notes: JSON.parse(notes) });
+  }
+
+  handleSave = () => {
+    const { notes } = this.state;
+    window.localStorage.setItem("notes", JSON.stringify(notes));
+  }
+
   render() {
     return (
       <div>
-        <AppBar />
+        <AppBar onReload={this.handleReload} onSave={this.handleSave} />
         <div className="container">
           <NewNote onAddNote={this.handleAddNote} />
           <NoteList 
