@@ -1,13 +1,13 @@
 import React from 'react';
 
-const AppBar = () => (
+const AppBar = ({ onReload, onSave }) => (
   <div className="app-bar">
     <div className="app-bar__container">
       <span className="app-bar__brand">React List</span>
-      <button className="app-bar__action">
+      <button className="app-bar__action" onClick={onReload}>
         <i className="material-icons">refresh</i>
       </button>
-      <button className="app-bar__action">
+      <button className="app-bar__action" onClick={onSave}>
         <i className="material-icons">save</i>
       </button>
     </div>
