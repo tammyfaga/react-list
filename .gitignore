@@ -1,0 +1,10 @@
+# Folders
+node_modules/
+bower_components/
+public/
+dist/
+
+# Files
+npm-debug.log
+
+*.swp
