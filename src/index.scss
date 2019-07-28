@@ -1,22 +1,55 @@
 @import "mixin";
 
+$app-padding: 20px;
+$container-max-width: 600px;
+
 body {
-  background-color: #03a9f4;
+  background-color: #c8c8c8;
+  color: #212121;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
 }
 
+.app-bar {
+  background-color: #03a9f4;
+  color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  @include box-shadow(2);
+
+  &__container {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 12px $app-padding;
+    max-width: $container-max-width;
+  }
+
+  &__brand {
+    flex: 1;
+  }
+
+  &__action {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+  }
+}
+
 .container {
   margin: 0 auto;
-  padding: 20px;
-  max-width: 600px;
+  padding: 70px $app-padding;
+  max-width: $container-max-width;
 }
 
 .new-note {
   background-color: #fff;
   padding: 10px 12px;
   border-radius: 2px;
-  @include box-shadow(2);
+  @include box-shadow(1);
 
   &__input {
     width: 100%;
@@ -39,7 +72,7 @@ body {
   background-color: #fff;
   padding: 10px 12px;
   border-radius: 2px;
-  @include box-shadow(2);
+  @include box-shadow(1);
 
   &__text {
     flex: 1;
