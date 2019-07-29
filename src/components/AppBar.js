@@ -1,15 +1,14 @@
 import React from 'react';
 
-const AppBar = ({ onReload, onSave }) => (
+const AppBar = ({ isLoading }) => (
   <div className="app-bar">
     <div className="app-bar__container">
       <span className="app-bar__brand">React List</span>
-      <button className="app-bar__action" onClick={onReload}>
-        <i className="material-icons">refresh</i>
-      </button>
-      <button className="app-bar__action" onClick={onSave}>
-        <i className="material-icons">save</i>
-      </button>
+      {isLoading && (
+        <button className="app-bar__action app-bar__action--rotation">
+          <i className="material-icons">refresh</i>
+        </button>
+      )}
     </div>
   </div>
 );

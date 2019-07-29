@@ -7,13 +7,22 @@ import AppBar from './AppBar';
 
 class App extends React.Component {
   state = {
-    notes: []
+    notes: [],
+    isLoading: false
   };
 
+  componentDidMount() {
+    this.handleReload();
+  }
+
   handleAddNote = text => {
-    this.setState(prevState => ({
-      notes: prevState.notes.concat({ id: uuid(), text })
-    }));
+    this.setState(prevState => {
+      const notes = prevState.notes.concat({ id: uuid(), text });
+      
+      this.handleSave(notes);
+
+      return { notes };
+    });
   };
 
   handleMove = (direction, index) => {
@@ -27,6 +36,8 @@ class App extends React.Component {
         newNotes.splice(index + 1, 0, removedNote);
       }
 
+      this.handleSave(newNotes);
+
       return {
         notes: newNotes
       };
@@ -39,6 +50,7 @@ class App extends React.Component {
       const index = newNotes.findIndex(note => note.id === id);
 
       newNotes.splice(index, 1)[0];
+      this.handleSave(newNotes);
 
       return {
         notes: newNotes
@@ -52,6 +64,7 @@ class App extends React.Component {
       const index = newNotes.findIndex(note => note.id === id);
 
       newNotes[index].text = text;
+      this.handleSave(newNotes);
 
       return {
         notes: newNotes
@@ -60,19 +73,27 @@ class App extends React.Component {
   };
 
   handleReload = () => {
+    this.setState({ isLoading: true });
     const notes = window.localStorage.getItem('notes');
-    this.setState({ notes: JSON.parse(notes) });
-  }
+    setTimeout(() => {
+      this.setState({ notes: JSON.parse(notes), isLoading: false });
+    }, 3000);
+  };
 
-  handleSave = () => {
-    const { notes } = this.state;
-    window.localStorage.setItem("notes", JSON.stringify(notes));
-  }
+  handleSave = notes => {
+    this.setState({ isLoading: true });
+    setTimeout(() => {
+      window.localStorage.setItem("notes", JSON.stringify(notes));
+      this.setState({ isLoading: false });
+    }, 3000);
+  };
 
   render() {
+    const { isLoading } = this.state;
+
     return (
       <div>
-        <AppBar onReload={this.handleReload} onSave={this.handleSave} />
+        <AppBar isLoading={isLoading} />
         <div className="container">
           <NewNote onAddNote={this.handleAddNote} />
           <NoteList 
