@@ -4,6 +4,7 @@ import uuid from "uuid/v1";
 import NewNote from './NewNote';
 import NoteList from './NoteList';
 import AppBar from './AppBar';
+import NoteService from '../services/NoteService';
 
 class App extends React.Component {
   state = {
@@ -74,18 +75,16 @@ class App extends React.Component {
 
   handleReload = () => {
     this.setState({ isLoading: true });
-    const notes = window.localStorage.getItem('notes');
-    setTimeout(() => {
+    NoteService.load().then(notes => {
       this.setState({ notes: JSON.parse(notes), isLoading: false });
-    }, 3000);
+    })
   };
 
   handleSave = notes => {
     this.setState({ isLoading: true });
-    setTimeout(() => {
-      window.localStorage.setItem("notes", JSON.stringify(notes));
+    NoteService.save(notes).then(() => {
       this.setState({ isLoading: false });
-    }, 3000);
+    })
   };
 
   render() {
