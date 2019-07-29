@@ -38,13 +38,17 @@ body {
     color: #ffffff;
     border-radius: 2px;
     cursor: pointer;
-    
+
     &:focus {
       outline: none;
     }
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.08);
+    }
+
+    &--rotation {
+      @include rotation();
     }
   }
 }
