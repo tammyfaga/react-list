@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import uuid from "uuid/v1";
 
 import NewNote from './NewNote';
 import NoteList from './NoteList';
 import AppBar from './AppBar';
 import NoteService from '../services/NoteService';
+import Error from './Error';
 
 class App extends React.Component {
   state = {
     notes: [],
-    isLoading: false
+    isLoading: false,
+    reloadHasError: false,
+    saveHasError: false
   };
+
+  componentDidCatch() {
+    this.setState({ reloadHasError: true });
+  }
 
   componentDidMount() {
     this.handleReload();
@@ -74,33 +81,52 @@ class App extends React.Component {
   };
 
   handleReload = () => {
-    this.setState({ isLoading: true });
-    NoteService.load().then(notes => {
-      this.setState({ notes: JSON.parse(notes), isLoading: false });
+    this.setState({ isLoading: true, reloadHasError: false });
+    NoteService.load()
+      .then(notes => {
+        this.setState({ notes, isLoading: false });
+      })
+      .catch(() => {
+        this.setState({ isLoading: false, reloadHasError: true });
     })
   };
 
   handleSave = notes => {
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true, saveHasError: false });
     NoteService.save(notes).then(() => {
       this.setState({ isLoading: false });
+    })
+    .catch(() => {
+      this.setState({ isLoading: false, saveHasError: true });
     })
   };
 
   render() {
-    const { isLoading } = this.state;
+    const { notes, isLoading, reloadHasError, saveHasError } = this.state;
 
     return (
       <div>
-        <AppBar isLoading={isLoading} />
+        <AppBar 
+          isLoading={isLoading} 
+          saveHasError={saveHasError} 
+          onSaveRetry={() => {
+            this.handleSave(notes);
+          }}
+        />
         <div className="container">
-          <NewNote onAddNote={this.handleAddNote} />
-          <NoteList 
-            notes={this.state.notes} 
-            onMove={this.handleMove} 
-            onDelete={this.handleDelete}
-            onEdit={this.handleEdit}
-          />
+          {reloadHasError ? (
+            <Error onRetry={this.handleReload} />
+          ) : (
+            <Fragment>
+              <NewNote onAddNote={this.handleAddNote} />
+              <NoteList 
+                notes={notes} 
+                onMove={this.handleMove} 
+                onDelete={this.handleDelete}
+                onEdit={this.handleEdit}
+                />
+            </Fragment>
+          )}
         </div>
       </div>
     );

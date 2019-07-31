@@ -2,6 +2,9 @@
 
 $app-padding: 20px;
 $container-max-width: 600px;
+$color-primary: #03a9f4;
+$color-danger: #f44336;
+$color-success: #4caf58;
 
 body {
   background-color: #c8c8c8;
@@ -11,8 +14,21 @@ body {
   padding: 0;
 }
 
+.error {
+  text-align: center;
+  
+  &__button {
+    background-color: $color-primary;
+    border: none;
+    border-radius: 2px;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #fff;
+  }
+}
+
 .app-bar {
-  background-color: #03a9f4;
+  background-color: $color-primary;
   color: #ffffff;
   position: fixed;
   top: 0;
@@ -21,10 +37,11 @@ body {
   @include box-shadow(2);
 
   &__container {
+    height: 46px;
     display: flex;
     align-items: center;
     margin: 0 auto;
-    padding: 12px $app-padding;
+    padding: 0 $app-padding;
     max-width: $container-max-width;
   }
 
@@ -49,6 +66,10 @@ body {
 
     &--rotation {
       @include rotation();
+    }
+
+    &--danger {
+      color: $color-danger;
     }
   }
 }
@@ -110,11 +131,11 @@ body {
     }
 
     &--red {
-      color: #f44336;
+      color: $color-danger;
     }
 
     &--green {
-      color: #4caf58;
+      color: $color-success;
     }
   }
 }
