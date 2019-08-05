@@ -4,3 +4,6 @@ Creating a CRUD list with React. Concepts applied based on the Udemy 'React Prof
 # Run
 `npm install`
 `npm start`
+
+# Project Link
+https://angry-torvalds-e93260.netlify.com/
