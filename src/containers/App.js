@@ -2,11 +2,11 @@ import React, { Fragment } from 'react';
 import uuid from "uuid/v1";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import AppBar from './AppBar';
-import NoteService from '../services/NoteService';
-import NavigationDrawer from './NavigationDrawer';
+import AppBar from '../components/AppBar';
+import NavigationDrawer from '../components/NavigationDrawer';
 import About from "./About";
 import Notes from "./Notes";
+import NoteService from '../services/NoteService';
 
 class App extends React.Component {
   state = {
@@ -133,7 +133,20 @@ class App extends React.Component {
           />
           <div className="container">
               <React.Fragment>
-                <Route path="/" exact component={Notes} />
+                <Route path="/" 
+                  exact 
+                  render={props => (
+                    <Notes 
+                      notes={notes}
+                      reloadHasError={reloadHasError}
+                      onRetry={this.handleReload}
+                      onAddNote={this.handleAddNote}
+                      onMove={this.handleMove} 
+                      onDelete={this.handleDelete}
+                      onEdit={this.handleEdit}
+                    />
+                  )} 
+                />
                 <Route path="/about" exact component={About} />
               </React.Fragment>
           </div>
