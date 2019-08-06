@@ -1,0 +1,42 @@
+@import "../../styles/mixin.scss";
+@import "../../styles/variables.scss";
+
+.note {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #fff;
+  padding: 10px 12px;
+  border-radius: 2px;
+  @include box-shadow(1);
+
+  &__text {
+    flex: 1;
+  }
+
+  &__input {
+    flex: 1;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid #c7c7c7;
+  }
+
+  &__button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+
+    &--hidden {
+      visibility: hidden;
+    }
+
+    &--red {
+      color: $color-danger;
+    }
+
+    &--green {
+      color: $color-success;
+    }
+  }
+}

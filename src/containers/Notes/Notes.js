@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 
-import NewNote from '../components/NewNote';
-import NoteList from '../components/NoteList';
-import Error from '../components/Error';
+import { NewNote, NoteList, Error } from "../../components";
 
 const Notes = ({ 
   notes,
