@@ -1,0 +1,50 @@
+@import "../../styles/mixin.scss";
+@import "../../styles/variables.scss";
+
+.app-bar {
+  background-color: $color-primary;
+  color: $white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  @include box-shadow(2);
+
+  &__container {
+    height: 46px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 $app-padding;
+    max-width: $container-max-width;
+  }
+
+  &__brand {
+    flex: 1;
+    padding-left: 8px;
+  }
+
+  &__action {
+    background-color: transparent;
+    border: none;
+    color: $white;
+    border-radius: 2px;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+    }
+
+    &--rotation {
+      @include rotation();
+    }
+
+    &--danger {
+      color: $color-danger;
+    }
+  }
+}
