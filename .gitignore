@@ -4,6 +4,7 @@ bower_components/
 public/
 dist/
 .cache/
+build/
 
 # Files
 npm-debug.log
