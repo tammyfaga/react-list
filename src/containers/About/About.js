@@ -1,10 +1,10 @@
 import React from 'react';
 
-import "./about.scss";
+import { Header } from "../../components";
 
 const About = () => (
-  <div className="about">
-    <h1>Note.js</h1>
+  <div>
+    <Header centered>Note.js</Header>
   </div>
 );
 

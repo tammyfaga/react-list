@@ -13,7 +13,7 @@ const PageLayout = ({
   onOpenMenu,
   isMenuOpen,
   onCloseMenu 
-}) => {
+}) => (
   <div>
     <AppBar 
       isLoading={isLoading} 
@@ -29,6 +29,6 @@ const PageLayout = ({
       onCloseMenu={onCloseMenu}
     />
   </div>
-};
+);
 
 export default PageLayout;
