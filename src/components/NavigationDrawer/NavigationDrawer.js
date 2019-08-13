@@ -2,9 +2,11 @@ import React from 'react';
 import className from 'classnames';
 import { withRouter } from "react-router-dom";
 
+import MenuItem from "./MenuItem";
+
 import "./navigation-drawer.scss"
 
-const NavigationDrawer = ({ isOpen, onCloseMenu, history}) => (
+const NavigationDrawer = ({ menu, isOpen, onCloseMenu, history, location }) => (
   <div 
     className={className("navigation-drawer", {
       "navigation-drawer--open": isOpen 
@@ -17,22 +19,18 @@ const NavigationDrawer = ({ isOpen, onCloseMenu, history}) => (
       </button>
     </div>
     <div className="navigation-drawer__menu">
-      <button className="navigation-drawer__menu__item"
-        onClick={() => {
-          onCloseMenu();
-          history.push("/"); 
-        }}
-      >
-        <i className="material-icons">note</i> Notas
-      </button>
-      <button className="navigation-drawer__menu__item"
-        onClick={() => {
-          onCloseMenu();
-          history.push("/about"); 
-        }}
-      >
-        <i className="material-icons">info</i> Sobre
-      </button>
+      {menu.map(item => (
+        <MenuItem
+          key={item.icon}
+          isActive={location.pathname === item.path}
+          onClick={() => {
+            onCloseMenu();
+            history.push(item.path); 
+          }}
+          icon={item.icon}
+          label={item.label}
+        />
+      ))}
     </div>
   </div>
 );

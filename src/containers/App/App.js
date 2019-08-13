@@ -3,10 +3,8 @@ import uuid from "uuid/v1";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { PageLayout } from "../../components";
-
-import About from "../About/About";
-import Notes from "../Notes/Notes";
-import NoteService from '../../services/NoteService';
+import NoteService from "../../services/NoteService";
+import Routes, { menu } from "../Routes";
 
 class App extends React.Component {
   state = {
@@ -131,24 +129,17 @@ class App extends React.Component {
           onOpenMenu={this.handleOpenMenu}
           isMenuOpen={isMenuOpen}
           onCloseMenu={this.handleCloseMenu}
+          menu={menu}
         >
-          <React.Fragment>
-            <Route path="/" 
-              exact 
-              render={props => (
-                <Notes 
-                  notes={notes}
-                  reloadHasError={reloadHasError}
-                  onRetry={this.handleReload}
-                  onAddNote={this.handleAddNote}
-                  onMove={this.handleMove} 
-                  onDelete={this.handleDelete}
-                  onEdit={this.handleEdit}
-                />
-              )}
-            />
-            <Route path="/about" exact component={About} />
-          </React.Fragment>
+          <Routes 
+            notes={notes}
+            reloadHasError={reloadHasError}
+            onRetry={this.handleReload}
+            onAddNote={this.handleAddNote}
+            onMove={this.handleMove} 
+            onDelete={this.handleDelete}
+            onEdit={this.handleEdit}
+          />
         </PageLayout>
       </Router>
     );
