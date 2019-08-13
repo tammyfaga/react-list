@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { PageLayout } from "../../components";
 import NoteService from "../../services/NoteService";
-import Routes from "../Routes";
+import Routes, { menu } from "../Routes";
 
 class App extends React.Component {
   state = {
@@ -129,6 +129,7 @@ class App extends React.Component {
           onOpenMenu={this.handleOpenMenu}
           isMenuOpen={isMenuOpen}
           onCloseMenu={this.handleCloseMenu}
+          menu={menu}
         >
           <Routes 
             notes={notes}
