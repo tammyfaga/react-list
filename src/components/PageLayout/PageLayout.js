@@ -12,7 +12,8 @@ const PageLayout = ({
   onSaveRetry,
   onOpenMenu,
   isMenuOpen,
-  onCloseMenu 
+  onCloseMenu,
+  menu
 }) => (
   <div>
     <AppBar 
@@ -25,6 +26,7 @@ const PageLayout = ({
       {children}
     </div>
     <NavigationDrawer 
+      menu={menu}
       isOpen={isMenuOpen}
       onCloseMenu={onCloseMenu}
     />
