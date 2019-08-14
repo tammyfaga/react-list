@@ -5,9 +5,11 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { PageLayout } from "../../components";
 import NoteService from "../../services/NoteService";
 import Routes, { menu } from "../Routes";
+import SettingsContext from "../Settings/SettingsContext";
 
 class App extends React.Component {
   state = {
+    theme: {},
     notes: [],
     isLoading: false,
     isMenuOpen: false,
@@ -109,8 +111,13 @@ class App extends React.Component {
     this.setState({ isMenuOpen: false });
   };
 
+  handleToggleTheme = theme => {
+    this.setState({ theme });
+  }
+
   render() {
-    const { 
+    const {
+      theme,
       notes, 
       isLoading, 
       isMenuOpen, 
@@ -120,27 +127,31 @@ class App extends React.Component {
 
     return (
       <Router>
-        <PageLayout
-          isLoading={isLoading} 
-          saveHasError={saveHasError} 
-          onSaveRetry={() => {
-            this.handleSave(notes);
-          }}
-          onOpenMenu={this.handleOpenMenu}
-          isMenuOpen={isMenuOpen}
-          onCloseMenu={this.handleCloseMenu}
-          menu={menu}
+        <SettingsContext.Provider 
+          value={{ theme, toggleTheme: this.handleToggleTheme }}
         >
-          <Routes 
-            notes={notes}
-            reloadHasError={reloadHasError}
-            onRetry={this.handleReload}
-            onAddNote={this.handleAddNote}
-            onMove={this.handleMove} 
-            onDelete={this.handleDelete}
-            onEdit={this.handleEdit}
-          />
-        </PageLayout>
+          <PageLayout
+            isLoading={isLoading} 
+            saveHasError={saveHasError} 
+            onSaveRetry={() => {
+              this.handleSave(notes);
+            }}
+            onOpenMenu={this.handleOpenMenu}
+            isMenuOpen={isMenuOpen}
+            onCloseMenu={this.handleCloseMenu}
+            menu={menu}
+          >
+            <Routes 
+              notes={notes}
+              reloadHasError={reloadHasError}
+              onRetry={this.handleReload}
+              onAddNote={this.handleAddNote}
+              onMove={this.handleMove} 
+              onDelete={this.handleDelete}
+              onEdit={this.handleEdit}
+            />
+          </PageLayout>
+        </SettingsContext.Provider>
       </Router>
     );
   }

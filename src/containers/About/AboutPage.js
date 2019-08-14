@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Header } from "../../components";
 
-const About = () => (
+const AboutPage = () => (
   <div>
     <Header centered>Note.js</Header>
   </div>
 );
 
-export default About;
+export default AboutPage;

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 import { NewNote, NoteList, Error } from "../../components";
 
-const Notes = ({ 
+const NotesPage = ({ 
   notes,
   reloadHasError,
   onRetry,
@@ -28,4 +28,4 @@ const Notes = ({
   );
 };
 
-export default Notes;
+export default NotesPage;

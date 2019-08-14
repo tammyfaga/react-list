@@ -1,8 +1,9 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import About from "./About/About";
-import Notes from "./Notes/Notes";
+import AboutPage from "./About/AboutPage";
+import NotesPage from "./Notes/NotesPage";
+import SettingsPage from "./Settings/SettingsPage";
 import PageNotFound from "./PageNotFound/PageNotFound";
 
 export const menu = [
@@ -24,7 +25,7 @@ const Routes = ({
     <Route path="/" 
       exact 
       render={props => (
-        <Notes 
+        <NotesPage
           notes={notes}
           reloadHasError={reloadHasError}
           onRetry={onRetry}
@@ -36,7 +37,8 @@ const Routes = ({
         />
       )}
     />
-    <Route path="/about" exact component={About} />
+    <Route path="/settings" component={SettingsPage} />
+    <Route path="/about" exact component={AboutPage} />
     <Route component={PageNotFound} />
   </Switch>
 );
