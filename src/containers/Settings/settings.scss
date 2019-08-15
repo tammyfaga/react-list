@@ -1,0 +1,18 @@
+@import "../../styles/variables.scss";
+
+.themes {
+  display: flex;
+
+  &__item {
+    background-color: $color-primary;
+    color: #fff;
+    margin-right: 8px;
+    border: none;
+    border-radius: 4px;
+    padding: 60px 12px 0 12px;
+    min-width: 120px;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}
