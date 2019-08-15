@@ -5,11 +5,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { PageLayout } from "../../components";
 import NoteService from "../../services/NoteService";
 import Routes, { menu } from "../Routes";
-import SettingsContext from "../Settings/SettingsContext";
+import SettingsProvider from "../Settings/SettingsProvider";
 
 class App extends React.Component {
   state = {
-    theme: {},
     notes: [],
     isLoading: false,
     isMenuOpen: false,
@@ -111,13 +110,8 @@ class App extends React.Component {
     this.setState({ isMenuOpen: false });
   };
 
-  handleToggleTheme = theme => {
-    this.setState({ theme });
-  }
-
   render() {
     const {
-      theme,
       notes, 
       isLoading, 
       isMenuOpen, 
@@ -127,9 +121,7 @@ class App extends React.Component {
 
     return (
       <Router>
-        <SettingsContext.Provider 
-          value={{ theme, toggleTheme: this.handleToggleTheme }}
-        >
+        <SettingsProvider>
           <PageLayout
             isLoading={isLoading} 
             saveHasError={saveHasError} 
@@ -151,7 +143,7 @@ class App extends React.Component {
               onEdit={this.handleEdit}
             />
           </PageLayout>
-        </SettingsContext.Provider>
+        </SettingsProvider>
       </Router>
     );
   }
