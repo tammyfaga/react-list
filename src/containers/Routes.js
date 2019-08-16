@@ -12,31 +12,9 @@ export const menu = [
   { icon: "info", label: "Sobre", path: "/about" }
 ];
 
-const Routes = ({
-  notes,
-  reloadHasError,
-  onRetry,
-  onAddNote,
-  onMove, 
-  onDelete,
-  onEdit
-}) => (
+const Routes = () => (
   <Switch>
-    <Route path="/" 
-      exact 
-      render={props => (
-        <NotesPage
-          notes={notes}
-          reloadHasError={reloadHasError}
-          onRetry={onRetry}
-          onAddNote={onAddNote}
-          onMove={onMove} 
-          onDelete={onDelete}
-          onEdit={onEdit}
-          {...props}
-        />
-      )}
-    />
+    <Route path="/" exact component={NotesPage} />
     <Route path="/settings" component={SettingsPage} />
     <Route path="/about" exact component={AboutPage} />
     <Route component={PageNotFound} />
