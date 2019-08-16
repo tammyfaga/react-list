@@ -2,6 +2,7 @@ import React from 'react';
 
 import AppBar from "../AppBar/AppBar";
 import NavigationDrawer from "../NavigationDrawer/NavigationDrawer";
+import withNotes from "../../containers/Notes/withNotes";
 
 import "./page-layout.scss";
 
@@ -33,4 +34,4 @@ const PageLayout = ({
   </div>
 );
 
-export default PageLayout;
+export default withNotes(PageLayout);
