@@ -5,7 +5,7 @@ import withSettings from "../../containers/Settings/withSettings";
 import "./app-bar.scss";
 
 const AppBar = ({ isLoading, saveHasError, onSaveRetry, onOpenMenu, theme }) => (
-  <div className="app-bar" style={{ backgroundColor: theme.colorPrimary }}>
+  <div className="app-bar" style={theme && theme.navBar}>
     <div className="app-bar__container">
       <button className="app-bar__action" onClick={onOpenMenu}>
         <i className="material-icons">menu</i>
