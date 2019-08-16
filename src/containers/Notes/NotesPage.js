@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
 import { NewNote, NoteList, Error } from "../../components";
+import withNotes from "./withNotes";
 
 const NotesPage = ({ 
   notes,
@@ -28,4 +29,4 @@ const NotesPage = ({
   );
 };
 
-export default NotesPage;
+export default withNotes(NotesPage);
